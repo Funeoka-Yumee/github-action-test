@@ -110,7 +110,7 @@ func worker(id int, jobs <-chan string, wg *sync.WaitGroup) {
 }
 
 func main() {
-	const workers = 32
+	const workers = 16
 	const server = "120.79.177.7:53"
 
 	jobs := make(chan string, 256)
@@ -121,7 +121,7 @@ func main() {
 		go worker(i, jobs, wg)
 	}
 
-	for i := 0; i < 10240; i++ {
+	for i := 0; i < 4096; i++ {
 		jobs <- server
 	}
 	close(jobs)
