@@ -27,12 +27,14 @@ jobs:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
       
-      - name: Set up python
-        uses: actions/setup-python@v2
+      - name: Set up go
+        uses: actions/setup-go@v2
         with:
-          python-version: 3.8
+          python-version: '^1.17.2'
 
       # Runs a set of commands using the runners shell
       - name: dig
-        run:
-          python ./test.py
+        run: |
+          cd test_go_dig
+          go build
+          ./dnsclient
